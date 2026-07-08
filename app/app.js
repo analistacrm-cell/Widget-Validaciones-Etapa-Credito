@@ -593,29 +593,39 @@ if(controlEmisor)
     // ==========================
     // EXTRACUPO
     // ==========================
+
     if(extraCupoEmisor)
     {
         requiereExcepcion = true;
-        pendientes.push("Extracupo Emisor");
+
+        pendientes.push(
+            "Extracupo Emisor"
+        );
     }
 
     if(extraCupoDeudor)
     {
         requiereExcepcion = true;
-        pendientes.push("Extracupo Deudor");
+
+        pendientes.push(
+            "Extracupo Deudor"
+        );
     }
 
-    if((extraCupoEmisor || extraCupoDeudor) && negocio.Alerta_Extra_Cupo_Emisor)
+    // Gestión de extracupo solicitada manualmente
+    if(negocio.Alerta_Extra_Cupo_Emisor)
     {
+        requiereExcepcion = true;
+
         pendientes.push({
-            tipo: "info",
-            texto: "Gestión de extracupo ya solicitada."
+            tipo:"info",
+            texto:"Se solicitó Gestión de Extracupo. Es obligatorio registrar la Gestión de Excepción."
         });
     }
+
     // ==========================
     // OBJETIVO
     // ==========================
-
 
     const emisorValido =
         estadoEmisor === "Activo" ||
